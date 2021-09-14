@@ -4,7 +4,8 @@ public class ViewTweetController {
         HttpRequest httpRequest = new HttpRequest();  
         httpRequest.setEndpoint('https://api.twitter.com/2/tweets?ids='+Id);
         httpRequest.setMethod('GET');
-        String token = 'AAAAAAAAAAAAAAAAAAAAAHANTgEAAAAAfa6HdGT%2FvBUMLaPHU1n8eEWjKek%3D7llRXMnDseRvpbR1uWxDfnl1AEwlJILqRUMFlIpKuCZjKP7Vj4';
+        Env_Config__c configSetting = Env_Config__c.getInstance('TwitterAPIToken');
+        String token = configSetting.Value__c;
         String authHeader = 'Bearer '+ token;
         httpRequest.setHeader('Authorization', authHeader);
         String strResponse = null;
