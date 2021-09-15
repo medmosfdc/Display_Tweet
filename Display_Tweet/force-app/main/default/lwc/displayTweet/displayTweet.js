@@ -5,9 +5,8 @@ export default class DisplayTweet extends LightningElement {
     theme = 'dark';
     tweetId = '1228393702244134912';
 	twitterVfUrl;
-    baseUrl = 'edmo-dev-ed.my.salesforce.com';
 
 	renderedCallback() {
-		this.twitterVfUrl = `${baseUrl}/apex/TweetVF?tweetId=${tweetId}?theme=${this.theme}`;
+		this.twitterVfUrl = `edmo-dev-ed.my.salesforce.com/apex/TweetVF?tweetId=${this.tweetId}?theme=${this.theme}`;
 	}
 }

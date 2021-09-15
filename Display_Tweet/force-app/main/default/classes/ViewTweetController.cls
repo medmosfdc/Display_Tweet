@@ -1,6 +1,7 @@
 public class ViewTweetController {
-    @AuraEnabled
-    public static string getTweet(String Id){
+    
+    @AuraEnabled(cacheable=true)
+    public static String getTweet(String Id){
         HttpRequest httpRequest = new HttpRequest();  
         httpRequest.setEndpoint('https://api.twitter.com/2/tweets?ids='+Id);
         httpRequest.setMethod('GET');
@@ -8,12 +9,12 @@ public class ViewTweetController {
         String token = configSetting.Value__c;
         String authHeader = 'Bearer '+ token;
         httpRequest.setHeader('Authorization', authHeader);
-        String strResponse = null;
+        Object data;
         try {  
             Http http = new Http();   
             HttpResponse httpResponse = http.send(httpRequest);  
             if (httpResponse.getStatusCode() == 200 ) {  
-                strResponse = httpResponse.getBody();  
+                data = httpResponse.getBody();  
             } 
             else {  
                 throw new CalloutException(httpResponse.getBody());  
@@ -23,10 +24,8 @@ public class ViewTweetController {
         catch(Exception ex) {  
             throw ex;  
         } 
-        if(!String.isBlank(strResponse)) {
-                return strResponse;
-        }else{
-            return null;
-        }
+        system.debug('data = '+ JSON.serialize(data));
+        return JSON.serialize(data);
+
     }
 }

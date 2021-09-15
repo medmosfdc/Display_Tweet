@@ -1,9 +1,10 @@
+<!-- 
+    This approach is meant as a workaround to run Twitter widgets.js despite being forbidden by locker service. 
+    This relies on an iframe to load a Visualforce page which can run widgets.js
+    With more time invested, this would present the tweet and leverage the existing markup as provided by twitter for a more consistent experience
+-->
 <template>
     <div>
-        <lightning-card>
-            <section class="slds-var-p-vertical_xx-small slds-var-p-horizontal_medium">
-                <iframe class="slds-size_12-of-12" src={twitterVfUrl} height={height}></iframe>
-            </section>
-        </lightning-card> 
+        <iframe class="slds-size_12-of-12" src={twitterVfUrl} height={height}></iframe>
     </div>
 </template>
